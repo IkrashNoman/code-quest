@@ -14,3 +14,10 @@ db.sqlite3
 venv/
 ENV/
 env/
+.venv/
+
+# Environment variables and config (security - do not commit!)
+main/config.py
+.env
+.env.local
+*.env

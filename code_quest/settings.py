@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,3 +94,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# External API keys
+# Set the GROK API key in your environment: GROK_API_KEY
+GROK_API_KEY = os.environ.get('GROK_API_KEY', '')
+GROK_API_URL = os.environ.get('GROK_API_URL', 'https://api.grok.ai/v1/analyze')

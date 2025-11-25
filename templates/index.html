@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Resume Evaluator</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Resume Evaluator</h1>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showTab('jobs')">Browse Jobs</a></li>
+                <li><a href="#" onclick="showTab('evaluate')">Evaluate Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Jobs Tab -->
+        <div id="jobs-tab" class="tab active">
+            <h2>Available Job Postings</h2>
+            <div id="jobs-list" class="jobs-container">
+                <p class="loading">Loading jobs...</p>
+            </div>
+        </div>
+
+        <!-- Evaluate Resume Tab -->
+        <div id="evaluate-tab" class="tab">
+            <h2>Evaluate Your Resume</h2>
+            <div class="eval-container">
+                <div class="eval-form">
+                    <form id="eval-form">
+                        <div class="form-group">
+                            <label for="candidate-name">Your Name</label>
+                            <input type="text" id="candidate-name" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="candidate-email">Your Email</label>
+                            <input type="email" id="candidate-email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-select">Select Job (Optional)</label>
+                            <select id="job-select">
+                                <option value="">-- Generic Evaluation --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="job-description">Job Description (if not selected above)</label>
+                            <textarea id="job-description" placeholder="Paste job description here..." rows="6"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resume-file">Upload Resume</label>
+                            <input type="file" id="resume-file" accept=".pdf,.docx,.doc,.txt,.png,.jpg,.jpeg,.tiff" required>
+                            <small>Supported: PDF, DOCX, TXT, PNG, JPG, TIFF</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Evaluate Resume</button>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results-section" class="results-section hidden">
+                    <h3>Evaluation Results</h3>
+                    
+                    <div class="score-card">
+                        <div class="score-display">
+                            <div class="score-number" id="score-value">--</div>
+                            <div class="score-label">Overall Score</div>
+                        </div>
+                        <div class="fit-display">
+                            <div class="fit-badge" id="fit-badge">--</div>
+                            <div class="fit-label" id="fit-text">--</div>
+                        </div>
+                    </div>
+
+                    <div class="results-grid">
+                        <!-- Skills Section -->
+                        <div class="card">
+                            <h4>Relevant Skills Found</h4>
+                            <div id="relevant-skills" class="skills-list">
+                                <p class="no-data">No skills found</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4>Missing Skills</h4>
+                            <div id="missing-skills" class="skills-list">
+                                <p class="no-data">No required skills</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Section -->
+                    <div class="card">
+                        <h4>Detailed Feedback</h4>
+                        <div id="feedback-text" class="feedback-box">
+                            --
+                        </div>
+                    </div>
+
+                    <!-- Breakdown Section -->
+                    <div class="card">
+                        <h4>Evaluation Method & Details</h4>
+                        <div id="breakdown-details" class="breakdown-box">
+                            --
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="resetEval()">Evaluate Another Resume</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Details Modal -->
+    <div id="job-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeJobModal()">&times;</span>
+            <h2 id="modal-job-title">Job Title</h2>
+            <p><strong>Location:</strong> <span id="modal-job-location">--</span></p>
+            <p><strong>Required Skills:</strong> <span id="modal-job-skills">--</span></p>
+            <div id="modal-job-description">
+                <!-- Job description goes here -->
+            </div>
+            <button class="btn btn-primary" id="apply-btn">Apply for this Job</button>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
